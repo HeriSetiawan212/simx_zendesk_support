@@ -16,10 +16,10 @@ class _MyAppState extends State<MyApp> {
   final _zendeskSupport = SimxZendeskSupport();
   String _status = 'Not Initialized';
   String _error = '';
-  final String _zendeskUrl = 'https://simxsupport.zendesk.com';
+  final String _zendeskUrl = 'zendeskUrl';
   final String _zendeskAppId =
-      'eff19831ca5f814df1a15f16994a6fedbc08eb6d262b5fc4';
-  final String _zendeskClientId = 'mobile_sdk_client_8eeb1c750082eae7ca31';
+      'zendeskAppId';
+  final String _zendeskClientId = 'zendeskClientId';
   final String _zendeskName = 'Bambang Heri Setiawan';
   final String _zendeskEmailId = 'bambangherisetiawan@gmail.com';
   final String _zendeskUserId = 'unique_user_id_123';
