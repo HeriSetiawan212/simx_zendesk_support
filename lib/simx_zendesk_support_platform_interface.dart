@@ -87,4 +87,14 @@ abstract class SimxZendeskSupportPlatform extends PlatformInterface {
   }) {
     throw UnimplementedError("startChat() has not been implemented.");
   }
+
+  /// Set the push token for Zendesk notifications
+  Future<void> setPushToken(String token) {
+    throw UnimplementedError('setPushToken() has not been implemented.');
+  }
+
+  /// Set the primary theme color for Zendesk SDK
+  Future<void> setThemeColor(int color) {
+    throw UnimplementedError('setThemeColor() has not been implemented.');
+  }
 }

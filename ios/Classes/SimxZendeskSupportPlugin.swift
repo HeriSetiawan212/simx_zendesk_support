@@ -95,9 +95,59 @@ public class SimxZendeskSupportPlugin: NSObject, FlutterPlugin {
             startChat(name: name, emailId: emailId, phoneNumber: phoneNumber)
             result(nil)
 
+        case "setPushToken":
+            guard let args = call.arguments as? [String: Any],
+                  let token = args["token"] as? String
+            else {
+                result(
+                    FlutterError(
+                        code: "INVALID_ARGUMENTS",
+                        message: "Push token is empty",
+                        details: nil
+                    ))
+                return
+            }
+            if let data = token.data(using: .utf8) {
+                PushNotifications.updatePushNotificationToken(data)
+                print("Push token updated")
+                result(nil)
+            } else {
+                result(
+                    FlutterError(
+                        code: "INVALID_TOKEN",
+                        message: "Invalid token format",
+                        details: nil
+                    ))
+            }
+
+        case "setThemeColor":
+            guard let args = call.arguments as? [String: Any],
+                  let colorInt = args["color"] as? Int
+            else {
+                result(
+                    FlutterError(
+                        code: "INVALID_ARGUMENTS",
+                        message: "Color is empty",
+                        details: nil
+                    ))
+                return
+            }
+            let color = uiColorFromInt(colorInt)
+            CommonTheme.currentTheme.primaryColor = color
+            print("Theme color set to: \(color)")
+            result(nil)
+
         default:
             result(FlutterMethodNotImplemented)
         }
+    }
+
+    private func uiColorFromInt(_ colorInt: Int) -> UIColor {
+        let alpha = CGFloat((colorInt >> 24) & 0xFF) / 255.0
+        let red = CGFloat((colorInt >> 16) & 0xFF) / 255.0
+        let green = CGFloat((colorInt >> 8) & 0xFF) / 255.0
+        let blue = CGFloat(colorInt & 0xFF) / 255.0
+        return UIColor(red: red, green: green, blue: blue, alpha: alpha)
     }
 
     func showListOfTicketsFullscreen() {

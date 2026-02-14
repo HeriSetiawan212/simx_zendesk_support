@@ -52,8 +52,8 @@ s.dependency 'ZendeskAnswerBotSDK'
 4. **startChatBot()** - Start automated Answer Bot chat
 5. **showListOfTickets()** - Display user's support tickets
 6. **sendUserInformationForTicket()** - Create new support ticket
-
-## Configuration Required
+7. **setPushToken()** - Register push notification token (FCM/APNS)
+8. **setThemeColor()** - Set primary theme color programmatically
 
 ### Android (`example/android/`)
 - `build.gradle.kts`: Zendesk Maven repositories
@@ -117,8 +117,6 @@ flutter run
 
 ## Future Enhancements
 - [ ] Add JWT authentication support
-- [ ] Add push notification support
-- [ ] Add custom theming options
 - [ ] Add more granular error handling
 - [ ] Add unit tests
 - [ ] Add integration tests

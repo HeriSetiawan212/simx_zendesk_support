@@ -166,6 +166,24 @@ class _MyAppState extends State<MyApp> {
                 ),
                 child: const Text('Show List of Tickets'),
               ),
+              const SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () => _testButton(
+                  'Set Push Token',
+                  () => _zendeskSupport.setPushToken(
+                    'fake_push_token_for_testing',
+                  ),
+                ),
+                child: const Text('Set Push Token (Testing)'),
+              ),
+              const SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () => _testButton(
+                  'Set Theme Color (Red)',
+                  () => _zendeskSupport.setThemeColor(0xFFFF0000),
+                ),
+                child: const Text('Set Theme Color (Red)'),
+              ),
             ],
           ),
         ),

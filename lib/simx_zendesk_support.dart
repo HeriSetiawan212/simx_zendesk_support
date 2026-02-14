@@ -137,4 +137,26 @@ class SimxZendeskSupport {
       throw Exception('Failed to start chat: $e');
     }
   }
+
+  /// Sets the push token for Zendesk notifications
+  Future<void> setPushToken(String token) async {
+    try {
+      await SimxZendeskSupportPlatform.instance.setPushToken(token);
+    } on PlatformException catch (e) {
+      throw Exception('Failed to set push token: ${e.message}');
+    } catch (e) {
+      throw Exception('Failed to set push token: $e');
+    }
+  }
+
+  /// Sets the primary theme color for Zendesk SDK UI
+  Future<void> setThemeColor(int color) async {
+    try {
+      await SimxZendeskSupportPlatform.instance.setThemeColor(color);
+    } on PlatformException catch (e) {
+      throw Exception('Failed to set theme color: ${e.message}');
+    } catch (e) {
+      throw Exception('Failed to set theme color: $e');
+    }
+  }
 }

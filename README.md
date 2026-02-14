@@ -103,9 +103,33 @@ _zendeskSupport.showHelpCenter(
 );
 ```
 
+### Push Notifications
+
+To register your push token with Zendesk (FCM for Android, APNs for iOS):
+
+```dart
+await _zendeskSupport.setPushToken("YOUR_DEVICE_TOKEN");
+```
+
+### Custom Theming
+
+You can set a primary theme color for the Zendesk SDK UI:
+
+```dart
+await _zendeskSupport.setThemeColor(0xFF0000FF); // Blue
+```
+
+*Note: On Android, programmatic theming for the Unified SDK is limited. It is recommended to use the `styles.xml` approach for comprehensive results.*
+
+## Support
+
+If you find this plugin helpful and want to support its development, you can buy me a coffee!
+
+<a href="https://saweria.co/setiawanheribambang" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 ## Contributing
 
-Contributions are welcome! If you find a bug or want to add a feature, please open an issue or submit a pull request on [GitHub](https://github.com/simxstudio/simx_zendesk_support).
+Contributions are welcome! If you find a bug or want to add a feature, please open an issue or submit a pull request on [GitHub](https://github.com/HeriSetiawan212/simx_zendesk_support).
 
 ## License
 

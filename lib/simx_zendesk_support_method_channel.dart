@@ -104,4 +104,14 @@ class MethodChannelSimxZendeskSupport extends SimxZendeskSupportPlatform {
       "phoneNumber": phoneNumber,
     });
   }
+
+  @override
+  Future<void> setPushToken(String token) async {
+    await methodChannel.invokeMethod('setPushToken', {'token': token});
+  }
+
+  @override
+  Future<void> setThemeColor(int color) async {
+    await methodChannel.invokeMethod('setThemeColor', {'color': color});
+  }
 }

@@ -210,6 +210,35 @@ class SimxZendeskSupportPlugin : FlutterPlugin, MethodChannel.MethodCallHandler,
                 }
             }
 
+            "setPushToken" -> {
+                val token = call.argument<String>("token")
+                if (token.isNullOrBlank()) {
+                    result.error("INVALID_ARGUMENTS", "Push token is empty", null)
+                    return
+                }
+                try {
+                    // Register with Support
+                    Support.INSTANCE.provider()?.pushRegistrationProvider()?.registerWithDeviceIdentifier(token, null)
+                    
+                    // Register with Chat
+                    Chat.INSTANCE.providers()?.pushNotificationsProvider()?.registerPushToken(token)
+                    
+                    Log.d("ZendeskPlugin", "Push token updated successfully for Support and Chat")
+                    result.success(null)
+                } catch (e: Exception) {
+                    Log.e("ZendeskPlugin", "setPushToken failed", e)
+                    result.error("PUSH_TOKEN_FAILED", e.message ?: "Unknown error", null)
+                }
+            }
+
+            "setThemeColor" -> {
+                val color = call.argument<Int>("color")
+                // For Android Unified SDK, primary color is usually handled via theme in XML.
+                // We'll log it for now as programmatic theme change is limited in Unified SDK.
+                Log.d("ZendeskPlugin", "Theme color requested: $color (Note: Programmatic color change is limited on Android Unified SDK, utilize styles.xml for better results)")
+                result.success(null)
+            }
+
             else -> result.notImplemented()
         }
     }
