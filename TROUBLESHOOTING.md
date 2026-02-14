@@ -1,0 +1,70 @@
+# Troubleshooting Android Debug Connection
+
+## Issue: "Error waiting for a debug connection: The log reader stopped unexpectedly"
+
+This error occurs when running the app in debug mode on some Android devices, particularly with the Zendesk SDK which has a large number of methods.
+
+### Solutions Applied:
+
+1. **Added MultiDex Support** (`example/android/app/build.gradle.kts`):
+   ```kotlin
+   defaultConfig {
+       multiDexEnabled = true
+   }
+   ```
+
+2. **Added Network Permissions** (`example/android/app/src/main/AndroidManifest.xml`):
+   ```xml
+   <uses-permission android:name="android.permission.INTERNET"/>
+   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+   <application android:usesCleartextTraffic="true">
+   ```
+
+3. **Added Zendesk Maven Repositories** (`example/android/build.gradle.kts`):
+   ```kotlin
+   allprojects {
+       repositories {
+           maven { url = uri("https://zendesk.jfrog.io/zendesk/repo") }
+           maven { url = uri("https://zendesk.jfrog.io/artifactory/repo") }
+       }
+   }
+   ```
+
+### Workarounds:
+
+If the debug connection still fails:
+
+1. **Run in Release Mode**:
+   ```bash
+   flutter run --release
+   ```
+
+2. **Run in Profile Mode**:
+   ```bash
+   flutter run --profile
+   ```
+
+3. **Install and Launch Manually**:
+   ```bash
+   flutter build apk
+   flutter install
+   # Then launch the app manually from the device
+   ```
+
+4. **Use Hot Restart Instead of Hot Reload**:
+   - Press `R` in the terminal instead of `r`
+
+5. **Check Device Logs**:
+   ```bash
+   adb logcat | grep -i flutter
+   ```
+
+### Device-Specific Issues:
+
+Some devices (particularly Vivo, Oppo, Xiaomi) have aggressive battery optimization that can interfere with debug connections. To fix:
+
+1. Go to Settings > Battery > App Battery Saver
+2. Find your app and set it to "No restrictions"
+3. Enable "Developer options" > "Stay awake" and "USB debugging (Security settings)"
+
+The app itself should work fine; this is only a debug connection issue.
