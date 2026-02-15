@@ -1,3 +1,10 @@
+## 0.0.3 (2026-02-15)
+
+* **Fixes (Android)**:
+    * Downgraded Java version to 11 (VERSION_11) for better compatibility with legacy environments.
+    * Updated Kotlin version to 2.2.21 to resolve compilation issues.
+    * Fixed various build-time warnings in the Android module.
+
 ## 0.0.2 (2026-02-15)
 
 * **Features**:

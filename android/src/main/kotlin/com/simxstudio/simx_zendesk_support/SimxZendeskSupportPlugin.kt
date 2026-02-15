@@ -218,7 +218,7 @@ class SimxZendeskSupportPlugin : FlutterPlugin, MethodChannel.MethodCallHandler,
                 }
                 try {
                     // Register with Support
-                    Support.INSTANCE.provider()?.pushRegistrationProvider()?.registerWithDeviceIdentifier(token, null)
+                    Zendesk.INSTANCE.provider()?.pushRegistrationProvider()?.registerWithDeviceIdentifier(token, null)
                     
                     // Register with Chat
                     Chat.INSTANCE.providers()?.pushNotificationsProvider()?.registerPushToken(token)
