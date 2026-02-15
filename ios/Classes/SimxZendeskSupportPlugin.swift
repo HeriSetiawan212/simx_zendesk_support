@@ -10,6 +10,7 @@ import SupportProvidersSDK
 import SupportSDK
 import UIKit
 import ZendeskCoreSDK
+import CommonUISDK
 
 public class SimxZendeskSupportPlugin: NSObject, FlutterPlugin {
     // ✅ GLOBAL USER ID (same as Android)
@@ -107,15 +108,25 @@ public class SimxZendeskSupportPlugin: NSObject, FlutterPlugin {
                     ))
                 return
             }
-            if let data = token.data(using: .utf8) {
-                PushNotifications.updatePushNotificationToken(data)
-                print("Push token updated")
+            if let zendesk = Zendesk.instance {
+                let pushProvider = ZDKPushProvider(zendesk: zendesk)
+                pushProvider.registerWithDeviceIdentifier(token, locale: NSLocale.current.identifier) { (identifier, error) in
+                    if let error = error {
+                        print("Push token update failed: \(error.localizedDescription)")
+                    } else {
+                        print("Push token updated successfully")
+                    }
+                }
+                
+                // Also register for Chat
+                Chat.registerPushTokenString(token)
+                
                 result(nil)
             } else {
                 result(
                     FlutterError(
-                        code: "INVALID_TOKEN",
-                        message: "Invalid token format",
+                        code: "NOT_INITIALIZED",
+                        message: "Zendesk is not initialized",
                         details: nil
                     ))
             }
@@ -133,7 +144,7 @@ public class SimxZendeskSupportPlugin: NSObject, FlutterPlugin {
                 return
             }
             let color = uiColorFromInt(colorInt)
-            CommonTheme.currentTheme.primaryColor = color
+            CommonUISDK.CommonTheme.currentTheme.primaryColor = color
             print("Theme color set to: \(color)")
             result(nil)
 

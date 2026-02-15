@@ -19,6 +19,7 @@ A new Flutter plugin project.
   s.dependency 'ZendeskChatSDK'
   s.dependency 'ZendeskSupportSDK'
   s.dependency 'ZendeskAnswerBotSDK'
+  s.dependency 'ZendeskCommonUISDK'
   
   s.platform = :ios, '13.0'
 
