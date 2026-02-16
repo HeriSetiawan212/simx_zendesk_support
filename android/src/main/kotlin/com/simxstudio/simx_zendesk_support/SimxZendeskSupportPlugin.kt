@@ -43,6 +43,7 @@ class SimxZendeskSupportPlugin : FlutterPlugin, MethodChannel.MethodCallHandler,
                 val name = call.argument<String>("name") ?: ""
                 val emailId = call.argument<String>("emailId") ?: ""
                 userId = call.argument<String>("userId") ?: ""
+                val jwtToken = call.argument<String>("jwtToken")
                 
                 if (url.isNullOrBlank() || appId.isNullOrBlank() || clientId.isNullOrBlank()) {
                     result.error("INVALID_ARGUMENTS", "Missing required initialization parameters", null)
@@ -61,10 +62,14 @@ class SimxZendeskSupportPlugin : FlutterPlugin, MethodChannel.MethodCallHandler,
                         Chat.INSTANCE.init(ctx, clientId, appId)
                         
                         // Set identity
-                        val identity = AnonymousIdentity.Builder()
-                            .withNameIdentifier("$name | UserID: $userId")
-                            .withEmailIdentifier(emailId)
-                            .build()
+                        val identity = if (!jwtToken.isNullOrBlank()) {
+                            JwtIdentity(jwtToken)
+                        } else {
+                            AnonymousIdentity.Builder()
+                                .withNameIdentifier("$name | UserID: $userId")
+                                .withEmailIdentifier(emailId)
+                                .build()
+                        }
                         Zendesk.INSTANCE.setIdentity(identity)
                         
                         isInitialized = true

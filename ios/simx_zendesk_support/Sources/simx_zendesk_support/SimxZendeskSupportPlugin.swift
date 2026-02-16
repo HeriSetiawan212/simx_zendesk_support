@@ -55,8 +55,15 @@ public class SimxZendeskSupportPlugin: NSObject, FlutterPlugin {
             // Initialize Support SDK
             Support.initialize(withZendesk: Zendesk.instance)
             let combinedName = "\(name) | UserID: \(userId)"
-            // Set identity (anonymous for now)
-            let identity = Identity.createAnonymous(name: combinedName, email: emailId)
+            let jwtToken = args["jwtToken"] as? String
+            
+            // Set identity
+            let identity: Identity
+            if let token = jwtToken, !token.isEmpty {
+                identity = Identity.createJwt(token: token)
+            } else {
+                identity = Identity.createAnonymous(name: combinedName, email: emailId)
+            }
             Zendesk.instance?.setIdentity(identity)
                 
             Chat.initialize(accountKey: clientId, appId: appId)

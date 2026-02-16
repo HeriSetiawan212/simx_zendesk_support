@@ -2,6 +2,7 @@
 
 * **Features**:
     * Added **Swift Package Manager (SPM)** support for iOS.
+    * Added **JWT Authentication** support for authenticated identities.
 * **Refactor (iOS)**:
     * Restructured `ios` directory to comply with Flutter SPM guidelines.
     * Migrated source files and resources to `ios/simx_zendesk_support/Sources/simx_zendesk_support/`.

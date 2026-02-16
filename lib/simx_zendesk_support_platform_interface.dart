@@ -28,17 +28,18 @@ abstract class SimxZendeskSupportPlatform extends PlatformInterface {
     required String url,
     required String appId,
     required String clientId,
-    required String name,
-    required String emailId,
-    required String userId,
+    required String? name,
+    required String? emailId,
+    required String? userId,
+    String? jwtToken,
   }) {
     throw UnimplementedError('initialize() has not been implemented.');
   }
 
   Future<void> showHelpCenter({
-    required String name,
-    required String emailId,
-    required String userId,
+    required String? name,
+    required String? emailId,
+    required String? userId,
     required List<int> categoryIdList,
   }) {
     throw UnimplementedError('showHelpCenter() has not been implemented.');
@@ -57,9 +58,9 @@ abstract class SimxZendeskSupportPlatform extends PlatformInterface {
   }
 
   Future<void> sendUserInformationForTicket({
-    required String name,
-    required String emailId,
-    required String userId,
+    required String? name,
+    required String? emailId,
+    required String? userId,
     required String tripId,
   }) {
     throw UnimplementedError(
@@ -72,18 +73,18 @@ abstract class SimxZendeskSupportPlatform extends PlatformInterface {
   }
 
   Future<void> showListOfTickets({
-    required String name,
-    required String emailId,
-    required String userId,
+    required String? name,
+    required String? emailId,
+    required String? userId,
     required String tripId,
   }) {
     throw UnimplementedError('showListOfTickets() has not been implemented.');
   }
 
   Future<void> startChat({
-    required String name,
-    required String emailId,
-    required String phoneNumber,
+    required String? name,
+    required String? emailId,
+    required String? phoneNumber,
   }) {
     throw UnimplementedError("startChat() has not been implemented.");
   }

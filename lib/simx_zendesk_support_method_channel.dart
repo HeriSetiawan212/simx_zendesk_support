@@ -14,9 +14,10 @@ class MethodChannelSimxZendeskSupport extends SimxZendeskSupportPlatform {
     required String url,
     required String appId,
     required String clientId,
-    required String name,
-    required String emailId,
-    required String userId,
+    required String? name,
+    required String? emailId,
+    required String? userId,
+    String? jwtToken,
   }) async {
     await methodChannel.invokeMethod('initialize', {
       'zendeskUrl': url,
@@ -25,14 +26,15 @@ class MethodChannelSimxZendeskSupport extends SimxZendeskSupportPlatform {
       "name": name,
       "emailId": emailId,
       "userId": userId,
+      "jwtToken": jwtToken,
     });
   }
 
   @override
   Future<void> showHelpCenter({
-    required String name,
-    required String emailId,
-    required String userId,
+    required String? name,
+    required String? emailId,
+    required String? userId,
     required List<int> categoryIdList,
   }) async {
     await methodChannel.invokeMethod('showHelpCenter', {
@@ -59,9 +61,9 @@ class MethodChannelSimxZendeskSupport extends SimxZendeskSupportPlatform {
 
   @override
   Future<void> sendUserInformationForTicket({
-    required String name,
-    required String emailId,
-    required String userId,
+    required String? name,
+    required String? emailId,
+    required String? userId,
     required String tripId,
   }) async {
     await methodChannel.invokeMethod("sendUserInformationForTicket", {
@@ -79,9 +81,9 @@ class MethodChannelSimxZendeskSupport extends SimxZendeskSupportPlatform {
 
   @override
   Future<void> showListOfTickets({
-    required String name,
-    required String emailId,
-    required String userId,
+    required String? name,
+    required String? emailId,
+    required String? userId,
     required String tripId,
   }) async {
     await methodChannel.invokeMethod('showListOfTickets', {
@@ -94,9 +96,9 @@ class MethodChannelSimxZendeskSupport extends SimxZendeskSupportPlatform {
 
   @override
   Future<void> startChat({
-    required String name,
-    required String emailId,
-    required String phoneNumber,
+    required String? name,
+    required String? emailId,
+    required String? phoneNumber,
   }) async {
     await methodChannel.invokeMethod('startChat', {
       "name": name,

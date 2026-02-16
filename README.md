@@ -126,6 +126,26 @@ await _zendeskSupport.setThemeColor(0xFF0000FF); // Blue
 
 *Note: On Android, programmatic theming for the Unified SDK is limited. It is recommended to use the `styles.xml` approach for comprehensive results.*
 
+## Future Enhancements
+- [x] Add JWT authentication support
+- [ ] Add more granular error handling
+- [x] Add unit tests
+- [x] Add integration tests
+
+### JWT Authentication Example
+
+```dart
+await _zendeskSupport.initialize(
+  url: 'https://yoursubdomain.zendesk.com',
+  appId: 'YOUR_APP_ID',
+  clientId: 'YOUR_CLIENT_ID',
+  name: 'User Name',
+  emailId: 'user@example.com',
+  userId: 'unique_user_id',
+  jwtToken: 'YOUR_JWT_TOKEN', // Provide JWT token for authenticated identity
+);
+```
+
 ## Support
 
 If you find this plugin helpful and want to support its development, you can buy me a coffee!

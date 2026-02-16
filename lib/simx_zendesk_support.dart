@@ -6,9 +6,10 @@ class SimxZendeskSupport {
     required String url,
     required String appId,
     required String clientId,
-    required String name,
-    required String emailId,
-    required String userId,
+    required String? name,
+    required String? emailId,
+    required String? userId,
+    String? jwtToken,
   }) async {
     try {
       await SimxZendeskSupportPlatform.instance.initialize(
@@ -18,6 +19,7 @@ class SimxZendeskSupport {
         name: name,
         emailId: emailId,
         userId: userId,
+        jwtToken: jwtToken,
       );
     } on PlatformException catch (e) {
       throw Exception('Failed to initialize Zendesk: ${e.message}');
@@ -27,9 +29,9 @@ class SimxZendeskSupport {
   }
 
   Future<void> showHelpCenter({
-    required String name,
-    required String emailId,
-    required String userId,
+    required String? name,
+    required String? emailId,
+    required String? userId,
     required List<int> categoryIdList,
   }) async {
     try {
@@ -81,9 +83,9 @@ class SimxZendeskSupport {
   }
 
   Future<void> sendUserInformationForTicket({
-    required String name,
-    required String emailId,
-    required String userId,
+    required String? name,
+    required String? emailId,
+    required String? userId,
     required String tripId,
   }) async {
     try {
@@ -101,9 +103,9 @@ class SimxZendeskSupport {
   }
 
   Future<void> showListOfTickets({
-    required String name,
-    required String emailId,
-    required String userId,
+    required String? name,
+    required String? emailId,
+    required String? userId,
     required String tripId,
   }) async {
     try {
@@ -121,9 +123,9 @@ class SimxZendeskSupport {
   }
 
   Future<void> startChat({
-    required String name,
-    required String emailId,
-    required String phoneNumber,
+    required String? name,
+    required String? emailId,
+    required String? phoneNumber,
   }) async {
     try {
       await SimxZendeskSupportPlatform.instance.startChat(

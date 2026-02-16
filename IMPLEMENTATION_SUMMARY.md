@@ -8,9 +8,12 @@ This plugin integrates Zendesk Support, Chat, and AnswerBot SDKs for both Androi
 ✅ Android implementation following official Zendesk Unified SDK documentation
 ✅ iOS implementation (Swift)
 ✅ Dart API layer with error handling
+✅ JWT Authentication support
 ✅ Example app with error display
 ✅ ProGuard rules added
 ✅ Documentation (README, CHANGELOG, LICENSE, TROUBLESHOOTING)
+✅ Unit tests (20 tests passed)
+✅ Integration tests (Plugin channel verification)
 
 ## SDK Versions Used (Official Zendesk Unified SDK)
 
@@ -98,17 +101,32 @@ Make sure to:
 ### Example App
 Located in `example/lib/main.dart`
 
-**Required**: Update Zendesk credentials:
-```dart
-final String _zendeskUrl = 'https://yoursubdomain.zendesk.com';
-final String _zendeskAppId = 'YOUR_APP_ID';
-final String _zendeskClientId = 'YOUR_CLIENT_ID';
-```
+**Required**: Update Zendesk credentials in the example app to test real functionality.
 
-### Running Tests
+**Running the Example**:
 ```bash
 cd example
 flutter run
+```
+
+### Unit Tests
+Located in the `test/` directory.
+- `simx_zendesk_support_test.dart`: Tests for the main plugin class using mocks.
+- `simx_zendesk_support_method_channel_test.dart`: Tests for the method channel implementation.
+
+**Running Unit Tests**:
+```bash
+flutter test
+```
+
+### Integration Tests
+Located in `example/integration_test/plugin_integration_test.dart`.
+
+**Running Integration Tests**:
+Ensure you have a device or emulator running, then:
+```bash
+cd example
+flutter test integration_test/plugin_integration_test.dart
 ```
 
 ## References
@@ -116,7 +134,7 @@ flutter run
 - [Zendesk SDK Versions](https://developer.zendesk.com/documentation/classic-web-widget-sdks/)
 
 ## Future Enhancements
-- [ ] Add JWT authentication support
+- [x] Add JWT authentication support
 - [ ] Add more granular error handling
-- [ ] Add unit tests
-- [ ] Add integration tests
+- [x] Add unit tests
+- [x] Add integration tests
