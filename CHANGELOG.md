@@ -1,8 +1,26 @@
+## 0.0.5 (2026-02-17)
+
+* **Features**:
+    * Added **Swift Package Manager (SPM)** support for iOS.
+* **Refactor (iOS)**:
+    * Restructured `ios` directory to comply with Flutter SPM guidelines.
+    * Migrated source files and resources to `ios/simx_zendesk_support/Sources/simx_zendesk_support/`.
+    * Maintained CocoaPods compatibility via updated `.podspec`.
+* **Documentation**:
+    * Updated `README.md` with SPM integration guide.
+    * Added troubleshooting guide for common Android theme issues.
+
+## 0.0.4 (2026-02-16)
+
+* **Improvements**:
+    * Minor tweaks and maintenance.
+
 ## 0.0.3 (2026-02-15)
 
 * **Fixes (Android)**:
     * Downgraded Java version to 11 (VERSION_11) for better compatibility with legacy environments.
     * Updated Kotlin version to 2.2.21 to resolve compilation issues.
+    * Fixed inconsistent JVM target compatibility between Java and Kotlin tasks.
     * Fixed various build-time warnings in the Android module.
 
 ## 0.0.2 (2026-02-15)

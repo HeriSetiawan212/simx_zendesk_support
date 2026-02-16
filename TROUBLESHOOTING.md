@@ -68,3 +68,60 @@ Some devices (particularly Vivo, Oppo, Xiaomi) have aggressive battery optimizat
 3. Enable "Developer options" > "Stay awake" and "USB debugging (Security settings)"
 
 The app itself should work fine; this is only a debug connection issue.
+
+---
+
+## Issue: Android Theming/Style Crash (AppBarLayout)
+
+When launching Zendesk activities on Android, you might encounter a crash related to `AppBarLayout` or missing theme attributes.
+
+### Error:
+`java.lang.IllegalArgumentException: The style on this component requires your app theme to be under Theme.MaterialComponents (or a descendant).`
+
+### Solution:
+
+1. **Update your App Theme**:
+   Ensure your main application theme in `android/app/src/main/res/values/styles.xml` (or `themes.xml`) inherits from a Material Components theme.
+
+   ```xml
+   <style name="LaunchTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+       <item name="android:windowBackground">@drawable/launch_background</item>
+   </style>
+
+   <style name="NormalTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+       <item name="android:windowBackground">?android:colorBackground</item>
+   </style>
+   ```
+
+2. **Define Required Attributes**:
+   If you cannot change the parent theme, ensure the following attributes are defined in your theme:
+   - `colorPrimary`
+   - `colorPrimaryDark`
+   - `colorAccent`
+
+3. **Check Dependencies**:
+   Ensure you have the Material Components library in your `android/app/build.gradle`:
+   ```gradle
+   implementation 'com.google.android.material:material:1.9.0'
+   ```
+
+## Issue: Swift Package Manager (SPM) Conflicts on iOS
+
+If you encounter issues after migrating to SPM:
+
+1. **Clear Build Folders**:
+   ```bash
+   flutter clean
+   rm -rf ios/Pods ios/Podfile.lock
+   ```
+
+2. **Enable SPM in Flutter**:
+   ```bash
+   flutter config --enable-swift-package-manager
+   ```
+
+3. **Re-install dependencies**:
+   ```bash
+   flutter pub get
+   ```
+

@@ -19,7 +19,7 @@ Add `simx_zendesk_support` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  simx_zendesk_support: ^0.0.1
+  simx_zendesk_support: ^0.0.4
 ```
 
 ### Platform Configuration
@@ -48,7 +48,12 @@ dependencies:
     platform :ios, '13.0'
     ```
 
-2.  Add usage descriptions to your `Info.plist` for camera, photo library, and microphone access (required for attachments and voice messages):
+2.  **Swift Package Manager Support**: This plugin supports Swift Package Manager (SPM) for iOS. If your app is configured to use SPM, Flutter will automatically resolve the dependencies. Ensure you've enabled SPM in your Flutter configuration:
+    ```bash
+    flutter config --enable-swift-package-manager
+    ```
+
+3.  Add usage descriptions to your `Info.plist` for camera, photo library, and microphone access (required for attachments and voice messages):
 
     ```xml
     <key>NSCameraUsageDescription</key>
@@ -130,6 +135,13 @@ If you find this plugin helpful and want to support its development, you can buy
 ## Contributing
 
 Contributions are welcome! If you find a bug or want to add a feature, please open an issue or submit a pull request on [GitHub](https://github.com/HeriSetiawan212/simx_zendesk_support).
+
+## Troubleshooting
+ 
+For common issues like Android theme crashes (`AppBarLayout`) or iOS build errors, please refer to the [TROUBLESHOOTING.md](TROUBLESHOOTING.md) guide.
+
+### Quick Tip: Android Theme
+If your app crashes when opening Zendesk UI, ensure your app theme inherits from `Theme.MaterialComponents` in `styles.xml`.
 
 ## License
 

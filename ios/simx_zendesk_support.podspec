@@ -13,7 +13,7 @@ A new Flutter plugin project.
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'SimxStudio' => 'setiawan.heri.bambang@gmail.com' }
   s.source           = { :path => '.' }
-  s.source_files = 'Classes/**/*'
+  s.source_files = 'simx_zendesk_support/Sources/simx_zendesk_support/**/*'
   s.dependency 'Flutter'
   s.dependency 'ZendeskCoreSDK'
   s.dependency 'ZendeskChatSDK'
@@ -31,5 +31,5 @@ A new Flutter plugin project.
   # required reason APIs, update the PrivacyInfo.xcprivacy file to describe your
   # plugin's privacy impact, and then uncomment this line. For more information,
   # see https://developer.apple.com/documentation/bundleresources/privacy_manifest_files
-  # s.resource_bundles = {'simx_zendesk_support_privacy' => ['Resources/PrivacyInfo.xcprivacy']}
+  s.resource_bundles = {'simx_zendesk_support_privacy' => ['simx_zendesk_support/Sources/simx_zendesk_support/Resources/PrivacyInfo.xcprivacy']}
 end
