@@ -1,6 +1,7 @@
-## 0.0.5 (2026-04-02)
+## 0.0.7 (2026-04-02)
 * **Fix**:
     * Fixing  support for Swift Compiler Error (Xcode): Value of type 'ZDKPushProvider' has no member 'registerWithDeviceIdentifier'
+    
 ## 0.0.5 (2026-02-17)
 * **Features**:
     * Added **Swift Package Manager (SPM)** support for iOS.
