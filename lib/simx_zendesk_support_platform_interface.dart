@@ -98,4 +98,9 @@ abstract class SimxZendeskSupportPlatform extends PlatformInterface {
   Future<void> setThemeColor(int color) {
     throw UnimplementedError('setThemeColor() has not been implemented.');
   }
+  /// Uninitialize the Zendesk SDK and clear user information
+  Future<void> uninitialize() {
+    throw UnimplementedError('uninitialize() has not been implemented.');
+  }
 }
+

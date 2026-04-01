@@ -117,7 +117,7 @@ public class SimxZendeskSupportPlugin: NSObject, FlutterPlugin {
             }
             if let zendesk = Zendesk.instance {
                 let pushProvider = ZDKPushProvider(zendesk: zendesk)
-                pushProvider.registerWithDeviceIdentifier(token, locale: NSLocale.current.identifier) { (identifier, error) in
+                pushProvider.register(deviceIdentifier: token, locale: NSLocale.current.identifier) { (identifier, error) in
                     if let error = error {
                         print("Push token update failed: \(error.localizedDescription)")
                     } else {
@@ -155,8 +155,18 @@ public class SimxZendeskSupportPlugin: NSObject, FlutterPlugin {
             print("Theme color set to: \(color)")
             result(nil)
 
+        case "uninitialize":
+            userId = ""
+            // Zendesk reset identity
+            Zendesk.instance?.setIdentity(Identity.createAnonymous())
+            // Chat clear cache
+            Chat.instance?.clearCache()
+            print("Zendesk and Chat uninitialized")
+            result(nil)
+
         default:
             result(FlutterMethodNotImplemented)
+
         }
     }
 

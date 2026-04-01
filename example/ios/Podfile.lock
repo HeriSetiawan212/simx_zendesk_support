@@ -6,6 +6,7 @@ PODS:
     - Flutter
     - ZendeskAnswerBotSDK
     - ZendeskChatSDK
+    - ZendeskCommonUISDK
     - ZendeskCoreSDK
     - ZendeskSupportSDK
   - ZendeskAnswerBotProvidersSDK (6.0.0):
@@ -61,7 +62,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   integration_test: 4a889634ef21a45d28d50d622cf412dc6d9f586e
-  simx_zendesk_support: 56d4f695364333fe813a67d0984f8a0d896a41ec
+  simx_zendesk_support: fd4ce2e48038ff5276d4267d908d091ad8af9885
   ZendeskAnswerBotProvidersSDK: 2f3d0e38acdbd4507862b4e4a7b28d3764072854
   ZendeskAnswerBotSDK: 7384c24429917499d7649db63fdebb175db295ca
   ZendeskChatProvidersSDK: 5cfc4a3dee03317ba54920e3258edda52ff9a329

@@ -161,4 +161,15 @@ class SimxZendeskSupport {
       throw Exception('Failed to set theme color: $e');
     }
   }
+  /// Uninitialize the Zendesk SDK and clear user information
+  Future<void> uninitialize() async {
+    try {
+      await SimxZendeskSupportPlatform.instance.uninitialize();
+    } on PlatformException catch (e) {
+      throw Exception('Failed to uninitialize Zendesk: ${e.message}');
+    } catch (e) {
+      throw Exception('Failed to uninitialize Zendesk: $e');
+    }
+  }
 }
+

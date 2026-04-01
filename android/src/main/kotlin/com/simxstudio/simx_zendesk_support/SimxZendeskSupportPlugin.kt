@@ -244,7 +244,24 @@ class SimxZendeskSupportPlugin : FlutterPlugin, MethodChannel.MethodCallHandler,
                 result.success(null)
             }
 
+            "uninitialize" -> {
+                isInitialized = false
+                userId = ""
+                try {
+                    // Reset identity for support
+                    Zendesk.INSTANCE.setIdentity(AnonymousIdentity.Builder().build())
+                    // Log out from Chat
+                    Chat.INSTANCE.clearCache()
+                    Log.d("ZendeskPlugin", "Zendesk uninitialized and identity reset")
+                    result.success(null)
+                } catch (e: Exception) {
+                    Log.e("ZendeskPlugin", "Error during uninitialize", e)
+                    result.error("UNINIT_FAILED", e.message ?: "Unknown error", null)
+                }
+            }
+
             else -> result.notImplemented()
+
         }
     }
 

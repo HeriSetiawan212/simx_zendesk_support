@@ -116,4 +116,9 @@ class MethodChannelSimxZendeskSupport extends SimxZendeskSupportPlatform {
   Future<void> setThemeColor(int color) async {
     await methodChannel.invokeMethod('setThemeColor', {'color': color});
   }
+  @override
+  Future<void> uninitialize() async {
+    await methodChannel.invokeMethod('uninitialize');
+  }
 }
+
