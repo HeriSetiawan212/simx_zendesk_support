@@ -10,14 +10,14 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "simx_zendesk_support",
+            name: "simx-zendesk-support",
             targets: ["simx_zendesk_support"]
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/zendesk/core_sdk_ios", from: "5.0.8"),
+        .package(url: "https://github.com/zendesk/core_sdk_ios", from: "5.0.5"),
         .package(url: "https://github.com/zendesk/support_sdk_ios", from: "9.3.0"),
-        .package(url: "https://github.com/zendesk/chat_sdk_ios", from: "5.0.8"),
+        .package(url: "https://github.com/zendesk/chat_sdk_ios", from: "5.0.5"),
         .package(url: "https://github.com/zendesk/answer_bot_sdk_ios", from: "6.0.3"),
         .package(url: "https://github.com/zendesk/commonui_sdk_ios", from: "9.3.0"),
     ],
