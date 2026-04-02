@@ -15,11 +15,11 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/zendesk/core_sdk_ios", from: "2.5.0"),
-        .package(url: "https://github.com/zendesk/support_sdk_ios", from: "5.5.0"),
-        .package(url: "https://github.com/zendesk/chat_sdk_ios", from: "2.12.0"),
-        .package(url: "https://github.com/zendesk/answer_bot_sdk_ios", from: "2.1.0"),
-        .package(url: "https://github.com/zendesk/commonui_sdk_ios", from: "0.1.0"),
+        .package(url: "https://github.com/zendesk/core_sdk_ios", from: "5.0.8"),
+        .package(url: "https://github.com/zendesk/support_sdk_ios", from: "9.3.0"),
+        .package(url: "https://github.com/zendesk/chat_sdk_ios", from: "5.0.8"),
+        .package(url: "https://github.com/zendesk/answer_bot_sdk_ios", from: "6.0.3"),
+        .package(url: "https://github.com/zendesk/commonui_sdk_ios", from: "9.3.0"),
     ],
     targets: [
         .target(
