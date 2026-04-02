@@ -1,3 +1,11 @@
+## 0.0.9 (2026-04-02)
+* **Features**:
+    * Added `uninitialize()` method for proper Zendesk SDK cleanup.
+* **Refactor (iOS)**:
+    * Migrated example app from CocoaPods to **Swift Package Manager (SPM)**.
+    * Adjusted `Package.swift` product naming for improved Flutter SPM discovery.
+    * Removed CocoaPods integration leftovers from the project.
+
 ## 0.0.8 (2026-04-02)
 * **Fix**:
     * Fixing  upgrade Zendesk SDK dependencies
