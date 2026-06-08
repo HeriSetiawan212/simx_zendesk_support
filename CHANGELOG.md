@@ -1,3 +1,12 @@
+## 0.0.6 (2026-06-08)
+
+* **Fixes (Android)**:
+    * Upgraded Zendesk SDK dependencies for Android 15/16 and 16 KB page size compatibility:
+        * `com.zendesk:messaging` 5.6.0 → 5.7.3
+        * `com.zendesk:support` 5.4.0 → 5.5.3
+        * `com.zendesk:answerbot` 3.3.2 → 3.4.2
+        * `com.zendesk:chat` 3.6.0 → 3.7.2
+
 ## 0.0.5 (2026-02-17)
 
 * **Features**:
