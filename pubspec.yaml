@@ -1,6 +1,6 @@
 name: simx_zendesk_support
 description: "A Flutter plugin for integrating Zendesk Support, Chat, and AnswerBot SDKs on Android and iOS."
-version: 0.0.6
+version: 0.0.10
 homepage: https://github.com/HeriSetiawan212/simx_zendesk_support
 repository: https://github.com/HeriSetiawan212/simx_zendesk_support
 issue_tracker: https://github.com/HeriSetiawan212/simx_zendesk_support/issues

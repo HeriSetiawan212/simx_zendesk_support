@@ -1,4 +1,4 @@
-## 0.0.6 (2026-06-08)
+## 0.0.10 (2026-06-08)
 
 * **Fixes (Android)**:
     * Upgraded Zendesk SDK dependencies for Android 15/16 and 16 KB page size compatibility:
