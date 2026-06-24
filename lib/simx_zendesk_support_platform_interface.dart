@@ -32,6 +32,8 @@ abstract class SimxZendeskSupportPlatform extends PlatformInterface {
     required String? emailId,
     required String? userId,
     String? jwtToken,
+    int? iosOrientationMask,
+    int? androidScreenOrientation,
   }) {
     throw UnimplementedError('initialize() has not been implemented.');
   }

@@ -18,6 +18,8 @@ class MethodChannelSimxZendeskSupport extends SimxZendeskSupportPlatform {
     required String? emailId,
     required String? userId,
     String? jwtToken,
+    int? iosOrientationMask,
+    int? androidScreenOrientation,
   }) async {
     await methodChannel.invokeMethod('initialize', {
       'zendeskUrl': url,
@@ -27,6 +29,8 @@ class MethodChannelSimxZendeskSupport extends SimxZendeskSupportPlatform {
       "emailId": emailId,
       "userId": userId,
       "jwtToken": jwtToken,
+      "iosOrientationMask": iosOrientationMask,
+      "androidScreenOrientation": androidScreenOrientation,
     });
   }
 

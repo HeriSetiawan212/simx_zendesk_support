@@ -1,6 +1,40 @@
 import 'package:flutter/services.dart';
 import 'simx_zendesk_support_platform_interface.dart';
 
+/// Android ActivityInfo.screenOrientation values for configuring Zendesk screen orientation.
+/// Pass one of these as [SimxZendeskSupport.initialize]'s [androidScreenOrientation] parameter.
+/// Has no effect on iOS.
+class ZendeskAndroidScreenOrientation {
+  ZendeskAndroidScreenOrientation._();
+
+  static const int landscape = 0;
+  static const int portrait = 1;
+  static const int sensorLandscape = 6;
+  static const int sensorPortrait = 7;
+  static const int reverseLandscape = 8;
+  static const int reversePortrait = 9;
+  static const int fullSensor = 10; // all orientations, sensor-driven
+  static const int userLandscape = 11;
+  static const int userPortrait = 12;
+  static const int fullUser = 13;
+  static const int locked = 14;
+}
+
+/// iOS UIInterfaceOrientationMask raw values for configuring Zendesk screen orientation.
+/// Pass one of these (or a bitwise OR of multiple) as [SimxZendeskSupport.initialize]'s
+/// [iosOrientationMask] parameter. Has no effect on Android.
+class ZendeskIosOrientationMask {
+  ZendeskIosOrientationMask._();
+
+  static const int portrait = 2;
+  static const int landscapeLeft = 4;
+  static const int landscapeRight = 8;
+  static const int portraitUpsideDown = 16;
+  static const int landscape = 24; // landscapeLeft | landscapeRight
+  static const int all = 30;
+  static const int allButUpsideDown = 26; // portrait | landscape
+}
+
 class SimxZendeskSupport {
   Future<void> initialize({
     required String url,
@@ -10,6 +44,12 @@ class SimxZendeskSupport {
     required String? emailId,
     required String? userId,
     String? jwtToken,
+    /// iOS only. Controls which orientations the Zendesk screens support.
+    /// Use [ZendeskIosOrientationMask] constants. Defaults to portrait-only (2).
+    int? iosOrientationMask,
+    /// Android only. Controls the screen orientation of Zendesk activities.
+    /// Use [ZendeskAndroidScreenOrientation] constants. Defaults to portrait (1).
+    int? androidScreenOrientation,
   }) async {
     try {
       await SimxZendeskSupportPlatform.instance.initialize(
@@ -20,6 +60,8 @@ class SimxZendeskSupport {
         emailId: emailId,
         userId: userId,
         jwtToken: jwtToken,
+        iosOrientationMask: iosOrientationMask,
+        androidScreenOrientation: androidScreenOrientation,
       );
     } on PlatformException catch (e) {
       throw Exception('Failed to initialize Zendesk: ${e.message}');

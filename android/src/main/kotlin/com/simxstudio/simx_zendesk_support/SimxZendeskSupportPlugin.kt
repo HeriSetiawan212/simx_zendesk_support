@@ -1,7 +1,10 @@
 package com.simxstudio.simx_zendesk_support
 
 import android.app.Activity
+import android.app.Application
 import android.content.Context
+import android.content.pm.ActivityInfo
+import android.os.Bundle
 import android.util.Log
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -27,9 +30,27 @@ class SimxZendeskSupportPlugin : FlutterPlugin, MethodChannel.MethodCallHandler,
     private var activity: Activity? = null
     private var userId: String = ""
     private var isInitialized: Boolean = false
+    private var screenOrientation: Int = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+    private var application: Application? = null
+
+    private val zendeskOrientationCallbacks = object : Application.ActivityLifecycleCallbacks {
+        override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+            if (activity.javaClass.name.startsWith("zendesk.")) {
+                activity.requestedOrientation = screenOrientation
+            }
+        }
+        override fun onActivityStarted(activity: Activity) {}
+        override fun onActivityResumed(activity: Activity) {}
+        override fun onActivityPaused(activity: Activity) {}
+        override fun onActivityStopped(activity: Activity) {}
+        override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
+        override fun onActivityDestroyed(activity: Activity) {}
+    }
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         context = binding.applicationContext
+        application = binding.applicationContext as? Application
+        application?.registerActivityLifecycleCallbacks(zendeskOrientationCallbacks)
         channel = MethodChannel(binding.binaryMessenger, "simx_zendesk_support")
         channel.setMethodCallHandler(this)
     }
@@ -44,6 +65,8 @@ class SimxZendeskSupportPlugin : FlutterPlugin, MethodChannel.MethodCallHandler,
                 val emailId = call.argument<String>("emailId") ?: ""
                 userId = call.argument<String>("userId") ?: ""
                 val jwtToken = call.argument<String>("jwtToken")
+                screenOrientation = call.argument<Int>("androidScreenOrientation")
+                    ?: ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
                 
                 if (url.isNullOrBlank() || appId.isNullOrBlank() || clientId.isNullOrBlank()) {
                     result.error("INVALID_ARGUMENTS", "Missing required initialization parameters", null)
@@ -266,6 +289,8 @@ class SimxZendeskSupportPlugin : FlutterPlugin, MethodChannel.MethodCallHandler,
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
+        application?.unregisterActivityLifecycleCallbacks(zendeskOrientationCallbacks)
+        application = null
         channel.setMethodCallHandler(null)
     }
 

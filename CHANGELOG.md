@@ -1,3 +1,14 @@
+## 0.0.11 (2026-06-25)
+
+* **Features**:
+    * Added configurable screen orientation for Zendesk screens on both platforms.
+        * **iOS**: `iosOrientationMask` parameter in `initialize()` using `ZendeskIosOrientationMask` constants (maps to `UIInterfaceOrientationMask`). Implemented via a custom `UINavigationController` subclass that overrides `supportedInterfaceOrientations`.
+        * **Android**: `androidScreenOrientation` parameter in `initialize()` using `ZendeskAndroidScreenOrientation` constants (maps to `ActivityInfo.screenOrientation`). Implemented via `Application.ActivityLifecycleCallbacks` to intercept Zendesk activities at creation.
+        * Default behavior is **portrait-only** on both platforms, fixing unwanted auto-rotation.
+* **Documentation**:
+    * Updated `README.md` with orientation configuration guide and reference tables.
+    * Bumped installation version to `^0.0.11`.
+
 ## 0.0.10 (2026-06-08)
 
 * **Fixes (Android)**:

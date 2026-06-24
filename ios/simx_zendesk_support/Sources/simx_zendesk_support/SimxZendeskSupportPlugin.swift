@@ -12,9 +12,24 @@ import UIKit
 import ZendeskCoreSDK
 import CommonUISDK
 
+private class ZendeskNavController: UINavigationController {
+    var orientationMask: UIInterfaceOrientationMask = .portrait
+
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return orientationMask
+    }
+
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        if orientationMask.contains(.portrait) { return .portrait }
+        if orientationMask.contains(.landscapeLeft) { return .landscapeLeft }
+        if orientationMask.contains(.landscapeRight) { return .landscapeRight }
+        return .portrait
+    }
+}
+
 public class SimxZendeskSupportPlugin: NSObject, FlutterPlugin {
-    // ✅ GLOBAL USER ID (same as Android)
     private var userId: String = ""
+    private var orientationMask: UIInterfaceOrientationMask = .portrait
 
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(
@@ -43,8 +58,9 @@ public class SimxZendeskSupportPlugin: NSObject, FlutterPlugin {
                     ))
                 return
             }
-            // ✅ STORE USER ID ONCE
             userId = args["userId"] as? String ?? ""
+            let maskRaw = args["iosOrientationMask"] as? Int ?? 2 // default: portrait
+            orientationMask = UIInterfaceOrientationMask(rawValue: UInt(maskRaw))
             // Initialize Zendesk
             Zendesk.initialize(
                 appId: appId,
@@ -170,6 +186,13 @@ public class SimxZendeskSupportPlugin: NSObject, FlutterPlugin {
         }
     }
 
+    private func makeNavController(root: UIViewController) -> ZendeskNavController {
+        let nav = ZendeskNavController(rootViewController: root)
+        nav.orientationMask = orientationMask
+        nav.modalPresentationStyle = .fullScreen
+        return nav
+    }
+
     private func uiColorFromInt(_ colorInt: Int) -> UIColor {
         let alpha = CGFloat((colorInt >> 24) & 0xFF) / 255.0
         let red = CGFloat((colorInt >> 16) & 0xFF) / 255.0
@@ -185,8 +208,7 @@ public class SimxZendeskSupportPlugin: NSObject, FlutterPlugin {
                 if let navController = rootVC as? UINavigationController {
                     navController.pushViewController(requestListController, animated: true)
                 } else {
-                    let navController = UINavigationController(rootViewController: requestListController)
-                    navController.modalPresentationStyle = .fullScreen
+                    let navController = makeNavController(root: requestListController)
                     rootVC.present(navController, animated: true, completion: nil)
                 }
             } else {
@@ -252,8 +274,7 @@ public class SimxZendeskSupportPlugin: NSObject, FlutterPlugin {
                     if let navController = rootVC as? UINavigationController {
                         navController.pushViewController(viewController, animated: true)
                     } else {
-                        let navController = UINavigationController(rootViewController: viewController)
-                        navController.modalPresentationStyle = .fullScreen
+                        let navController = makeNavController(root: viewController)
                         rootVC.present(navController, animated: true, completion: nil)
                     }
                 }
@@ -307,8 +328,7 @@ public class SimxZendeskSupportPlugin: NSObject, FlutterPlugin {
             //       requestConfig.subject = "Trip Support Request"
 
             let requestVC = RequestUi.buildRequestUi(with: [requestConfig])
-            let navController = UINavigationController(rootViewController: requestVC)
-            navController.modalPresentationStyle = .fullScreen
+            let navController = makeNavController(root: requestVC)
 
             // Add close button
             let closeButton = UIBarButtonItem(
@@ -368,9 +388,7 @@ public class SimxZendeskSupportPlugin: NSObject, FlutterPlugin {
                 withConfigs: [helpCenterConfig, requestConfig]
             )
 
-            // Create navigation controller for proper fullscreen presentation
-            let navController = UINavigationController(rootViewController: helpCenterVC)
-            navController.modalPresentationStyle = .fullScreen
+            let navController = makeNavController(root: helpCenterVC)
             // Add close button to navigation bar
             let closeButton = UIBarButtonItem(
                 barButtonSystemItem: .done,
@@ -412,8 +430,7 @@ public class SimxZendeskSupportPlugin: NSObject, FlutterPlugin {
                 )
 
                 // Embed in a navigation controller for fullscreen experience
-                let navController = UINavigationController(rootViewController: answerBotVC)
-                navController.modalPresentationStyle = .fullScreen
+                let navController = makeNavController(root: answerBotVC)
                 navController.setNavigationBarHidden(false, animated: false)
 
                 // Add close button
